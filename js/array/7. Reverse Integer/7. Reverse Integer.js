@@ -2,6 +2,7 @@
  * @param {number} x
  * @return {number}
  */
+
 var reverse = function(x) {
     let sum = 0;
     let flag = x>0 ? 1 : -1;
@@ -11,5 +12,6 @@ var reverse = function(x) {
         sum = sum * 10 + remainder;
         x = Math.floor(x/10);
     }
-    return sum * flag;
+    let result = sum * flag;
+    return (result <= 0x7fffffff && result >= -0x80000000) ? result : 0;
 };
