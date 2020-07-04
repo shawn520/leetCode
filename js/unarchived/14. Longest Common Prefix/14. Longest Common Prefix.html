@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01_HelloWorld</title>
+</head>
+<body>
+
+<!--
+  1. 引入Vue.js
+  2. 创建Vue对象
+    el : 指定根element(选择器)
+    data : 初始化数据(页面可以访问)
+  3. 双向数据绑定 : v-model
+  4. 显示数据 : {{xxx}}
+  5. 理解vue的mvvm实现
+-->
+
+<!--模板-->
+<div id="test">
+  <input type="text" v-model="params"><br><!--指令-->
+  <input type="text" v-model="params"><!--指令-->
+  <p>hello {{ params[0] }}</p><!--大括号表达式-->
+  <button @click="longestCommonPrefix(params)">点击调用函数</button>
+</div>
+
+<script type="text/javascript" src="../../vue.js"></script>
+<script type="text/javascript">
+  const vm = new Vue({ // 配置对象 options
+    // 配置选项(option)
+    el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+    data: {
+      msg: 'atguig',
+      params: ["flower", "flow", "flight"]
+    },
+    methods: {
+    getCommonPrefix: function(str1, str2) {
+        let i = 0;
+        for(;i<str1.length && i< str2.length; i++) {
+            if(str1[i] != str2[i]) break;
+        }
+        if(i-2 <0) return '';
+        return str1.slice(0, i-2);
+    },
+    longestCommonPrefix: function(strs) {
+        if (strs === undefined || strs.length === 0) { return ''; }
+        let prefix = strs[0];
+        for(let i=0; i<strs.length-1; i++) {
+            prefix = this.getCommonPrefix(prefix, strs[i]);
+            if(prefix === '') break;
+        }
+        return prefix;
+        // alert(prefix);
+    }
+    }
+  })
+</script>
+</body>
+</html>
